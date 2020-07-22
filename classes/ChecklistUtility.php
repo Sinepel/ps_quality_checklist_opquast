@@ -40,4 +40,36 @@ class ChecklistUtilty
     {
         return unserialize(Configuration::get('PSOPQUASTCURRENT'));
     }
+
+    public static function getStats()
+    {
+        return [
+            'ok' => self::getStatsByStatus('ok'),
+            'ko' => self::getStatsByStatus('ko'),
+            'na' => self::getStatsByStatus('na'),
+            'nv' => self::getStatsByStatus('nv'),
+        ];
+    }
+
+    public static function getStatsByStatus( $status = '' ) {
+        if ( empty( $status ) ) {
+                return;
+        }
+        $criteria = self::getCriteriasFromJSON(); 
+       
+        $existing_criteria = array();
+        $existing_criteria = self::getCurrentCriterias();
+       
+        $corresponding_criteria = array();
+        if ( $status === 'nv' ) {
+                return count( $criteria ) - count( $existing_criteria );               
+        } else {
+                foreach ( $existing_criteria as $key => $value ) {
+                        if ( $value === $status ) {
+                                $corresponding_criteria[] = $key;
+                        }
+                }
+                return count( $corresponding_criteria );
+        }
+}
 }

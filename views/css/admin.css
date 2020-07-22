@@ -1,0 +1,73 @@
+#opquast-panels {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+#opquast-panels #accordion a.action {
+  color: #000 !important;
+  text-decoration: underline !important;
+}
+
+#accordion {
+  border: 1px solid #ccd0d4;
+  margin-top: 20px;
+}
+
+#opquast-panels fieldset {
+  margin-bottom: 10px;
+}
+
+#opquast-panels fieldset.opquast-verification {
+  padding: 1em 0.5em;
+  background: #f5f5f5;
+}
+
+#opquast-panels fieldset input[type="radio"] {
+  margin-left: 2em;
+  margin-right: 5px;
+}
+
+#opquast-panels fieldset label {
+  margin-bottom: 0px;
+  margin-left: 1px;
+}
+
+.card-header {
+  border-top: 1px solid #ccd0d4;
+}
+
+#opquast-panels h5 {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  font-family: initials;
+}
+
+#opquast-panels h5 a {
+  display: block;
+  color: #333;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+#opquast-panels h5 a:hover {
+  background: #f8f9f9;
+}
+
+#opquast-panels .tags {
+  padding: 10px;
+}
+
+#opquast-panels .tags span {
+  border: 1px solid #ccd0d4;
+  padding: 5px;
+  margin: 10px;
+}
+
+
+#opquast-panels .card-block {
+  padding: 15px;
+  border-top: 1px solid #ccd0d4;
+  font-family: initial;
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
