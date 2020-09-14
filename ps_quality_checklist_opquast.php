@@ -63,17 +63,17 @@ class Ps_Quality_Checklist_Opquast extends Module
         $this->context->controller->addCSS($this->_path . 'views/css/admin.css');
 
 
+        $checklist = ChecklistUtilty::getOPQuastChecklist();
         $themes = ChecklistUtilty::getThemesFromJSON();
-        $criterias = ChecklistUtilty::getCriteriasFromJSON();
-        $criteriasContent = ChecklistUtilty::getCriteriasContentFromJSON();
         $currentCriterias = ChecklistUtilty::getCurrentCriterias();
         $stats = ChecklistUtilty::getStats();
         
         $this->context->smarty->assign(
             array(
                 'themes' => $themes,
-                'criterias' => $criterias,
-                'criteriasContent' => $criteriasContent,
+                // 'criterias' => $criterias,
+                // 'criteriasContent' => $criteriasContent,
+                'checklist' => $checklist,
                 'currentCriterias' => $currentCriterias,
                 'path' => $this->_path,
                 'stats' => $stats,

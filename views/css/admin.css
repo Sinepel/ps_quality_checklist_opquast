@@ -35,21 +35,21 @@
   border-top: 1px solid #ccd0d4;
 }
 
-#opquast-panels h5 {
+.card-header p {
   font-size: 16px;
   padding: 0;
   margin: 0;
   font-family: initials;
 }
 
-#opquast-panels h5 a {
+.card-header p a {
   display: block;
   color: #333;
   padding: 10px 10px;
   width: 100%;
 }
 
-#opquast-panels h5 a:hover {
+.card-header p a:hover {
   background: #f8f9f9;
 }
 
@@ -70,4 +70,19 @@
   font-family: initial;
   font-size: 1.2em;
   line-height: 1.5em;
+}
+
+#opquast-panels a[target="_blank"]::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+}
+
+div.content div{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+div.content span {
+  font-weight: 700;
+  margin-bottom: 10px;
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_quality_checklist_opquast</name>
+    <displayName><![CDATA[Prestashop Quality Checklist Opquast]]></displayName>
+    <version><![CDATA[1]]></version>
+    <description><![CDATA[Checklist qualit&eacute; web Opquast pour Prestashop]]></description>
+    <author><![CDATA[&lt;a href=&quot;https://constantin-boulanger.fr&quot; target=&quot;_blank&quot;&gt;Constantin Boulanger&lt;/a&gt;]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

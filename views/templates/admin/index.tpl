@@ -80,52 +80,66 @@
             </div>
             <div class="row">
                 <div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
-                    {foreach $criterias as $crit}
-                    <div class="card {$crit->sanitized_tags} {if isset($currentCriterias[$crit->id])} {$currentCriterias[$crit->id]} {else}nv{/if}">
-                        <div class="card-header" role="tab" id="heading_{$crit->id}" {if $crit@first}
-                            style="border-top:none;" {/if}> <h5 class="mb-0">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                href="#crit_{$crit->id}" aria-expanded="false" aria-controls="{$crit->title}">
-                                {$crit->id}. {$crit->title}
-                            </a>
-                            </h5>
+                    {foreach $checklist as $crit}
+                    <div class="card {$crit.sanitized_tags} {if isset($currentCriterias[$crit.id])} {$currentCriterias[$crit.id]} {else}nv{/if}">
+                        <div class="card-header" role="tab" id="heading_{$crit.id}" {if $crit@first}
+                            style="border-top:none;" {/if}> 
+                            <p class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                    href="#crit_{$crit.id}" aria-expanded="false" aria-controls="{$crit.description_fr}">
+                                    {$crit.name_fr} - {$crit.description_fr}
+                                </a>
+                            </p>
                         </div>
-                        <div id="crit_{$crit->id}" class="collapse" role="tabpanel"
-                            aria-labelledby="heading_{$crit->id}">
+                        <div id="crit_{$crit.id}" class="collapse" role="tabpanel"
+                            aria-labelledby="heading_{$crit.id}">
                             <div class="card-block">
                                 <fieldset class="opquast-verification">
                                     <span>Statut :</span>
-                                    <input type="radio" name="opquast-checklist-{$crit->id}" id="input-ok-{$crit->id}"
-                                        value="ok" {if isset($currentCriterias[$crit->id]) &&
-                                    $currentCriterias[$crit->id]
+                                    <input type="radio" name="opquast-checklist-{$crit.id}" id="input-ok-{$crit.id}"
+                                        value="ok" {if isset($currentCriterias[$crit.id]) &&
+                                    $currentCriterias[$crit.id]
                                     == "ok"} checked {/if} />
-                                    <label for="input-ok-{$crit->id}">Conforme</label>
+                                    <label for="input-ok-{$crit.id}">Conforme</label>
 
-                                    <input type="radio" name="opquast-checklist-{$crit->id}" id="input-ko-{$crit->id}"
-                                        value="ko" {if isset($currentCriterias[$crit->id]) &&
-                                    $currentCriterias[$crit->id]
+                                    <input type="radio" name="opquast-checklist-{$crit.id}" id="input-ko-{$crit.id}"
+                                        value="ko" {if isset($currentCriterias[$crit.id]) &&
+                                    $currentCriterias[$crit.id]
                                     == "ko"} checked {/if} />
-                                    <label for="input-ko-{$crit->id}">Non conforme</label>
+                                    <label for="input-ko-{$crit.id}">Non conforme</label>
 
-                                    <input type="radio" name="opquast-checklist-{$crit->id}" id="input-na-{$crit->id}"
-                                        value="na" {if isset($currentCriterias[$crit->id]) &&
-                                    $currentCriterias[$crit->id]
+                                    <input type="radio" name="opquast-checklist-{$crit.id}" id="input-na-{$crit.id}"
+                                        value="na" {if isset($currentCriterias[$crit.id]) &&
+                                    $currentCriterias[$crit.id]
                                     == "na"} checked {/if} />
-                                    <label for="input-na-{$crit->id}">Non applicable</label>
+                                    <label for="input-na-{$crit.id}">Non applicable</label>
                                 </fieldset>
-                                {$criteriasContent->{$crit->id} nofilter}
+                                <div class="content"> 
+                                    <span>{{l s='Goal' mod='ps_quality_checklist_opquast'}}</span>
+                                    <div>
+                                        {$crit.goal_fr nofilter}
+                                    </div>
+                                    <span>{{l s='Solution' mod='ps_quality_checklist_opquast'}}</span>
+                                    <div>
+                                        {$crit.solution_fr nofilter}
+                                    </div>
+                                    <span>{{l s='Control' mod='ps_quality_checklist_opquast'}}</span>
+                                    <div>
+                                        {$crit.control_fr nofilter}
+                                    </div>
+                                </div>
                                 <p>
-                                    <a href="https://checklists.opquast.com{$crit->link}" class="action" target="_black"
+                                    <a href="https://checklists.opquast.com/fr/qualiteweb/{$crit.slug_fr}" class="action" target="_blank"
                                         rel="noopener noreferrer">
                                         {l s='See the detail for Opquast' mod='ps_quality_checklist_opquast'}
-                                        <span class="screen-reader-text"> ({l s='opens in a new tab'
+                                        <span class="sr-only"> ({l s='opens in a new tab'
                                             mod='ps_quality_checklist_opquast'})</span>
                                         <span aria-hidden="true" class="dashicons dashicons-external"></span>
                                     </a>
                                 </p>
 
                                 <div class="tags">
-                                    {foreach from=","|explode:$crit->tags item=item key=key name=name}
+                                    {foreach from=$crit.tags item=item key=key name=name}
                                     <span>{$item}</span>
                                     {/foreach}
                                 </div>
