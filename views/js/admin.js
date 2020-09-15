@@ -2,15 +2,19 @@ $(function () {
     $('select[id^=opquast-filter-]').on('change', function () {
         var selected_status_slug = $(this).val();
         var selected_status_title = $(this).children('option:selected').text();
-        console.log(selected_status_slug, selected_status_title);
         var count = 0;
         $('.card').each(function () {
             $(this).removeClass('hidden');
             //$(this).next().attr('hidden', 'hidden');
-            if (!$(this).hasClass(selected_status_slug) && selected_status_slug !== '') {
-                $(this).addClass('hidden');
-            } else {
-                count++;
+            if (selected_status_slug !== '') {
+                console.log($(this).hasClass(selected_status_slug));
+                    
+                if ($(this).hasClass(selected_status_slug)) {
+                    $(this).removeClass('hidden');
+                } else {
+                    $(this).addClass('hidden');
+
+                }
             }
         });
 

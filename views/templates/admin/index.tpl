@@ -1,29 +1,5 @@
 <div id="opquast-panels">
-    <div class="panel">
-        <p class="opquast-licence">
-            Les bonnes pratiques Opquast sont proposées sous licence <a
-                href="https://creativecommons.org/licenses/by-sa/2.0/fr/"
-                title="Creative Commons - Attribution - Partage dans les Mêmes Conditions (CC BY-SA 2.0 FR)"
-                target="_blank" rel="noopener noreferrer">CC BY-SA <span class="screen-reader-text">(ce lien s'ouvre
-                    dans un nouvel
-                    onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
-            <br />
-            Les moyens de contrôle et de mise en œuvre sous licence <a
-                href="https://creativecommons.org/licenses/by-nc-sa/2.0/fr/"
-                title="Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions (CC BY-NC-SA 2.0)"
-                target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="screen-reader-text">(ce lien s'ouvre
-                    dans
-                    un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
-        </p>
-        <p class="opquast-licence">
-            <a href="https://checklists.opquast.com/fr/" target="_blank" rel="noopener noreferrer">
-                En savoir plus sur les checklists Opquast
-                <span class="screen-reader-text"> (s’ouvre dans un nouvel onglet)</span>
-                <span aria-hidden="true" class="dashicons dashicons-external"></span>
-            </a>
-        </p>
-    </div>
-    <div class="panel">
+    <div class="panel middle">
         <h3><i class="icon-cogs"></i> {l s='Yours stats' mod='ps_quality_checklist_opquast'}</h3>
         <ul class="opquast-stats">
             <li>
@@ -44,7 +20,32 @@
             </li>
 
         </ul>
-        <img src="{$path}/data/opquast-logo-full.png">
+    </div>
+
+    <div class="panel middle">
+        <img width="200"src="{$path}/data/opquast-logo-full.png" alt="OPQuast Logo">
+        <p class="opquast-licence">
+            Les bonnes pratiques Opquast sont proposées sous licence <a
+                href="https://creativecommons.org/licenses/by-sa/2.0/fr/"
+                title="Creative Commons - Attribution - Partage dans les Mêmes Conditions (CC BY-SA 2.0 FR)"
+                target="_blank" rel="noopener noreferrer">CC BY-SA <span class="sr-only">(ce lien s'ouvre
+                    dans un nouvel
+                    onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+            <br />
+            Les moyens de contrôle et de mise en œuvre sous licence <a
+                href="https://creativecommons.org/licenses/by-nc-sa/2.0/fr/"
+                title="Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions (CC BY-NC-SA 2.0)"
+                target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="sr-only">(ce lien s'ouvre
+                    dans
+                    un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+        </p>
+        <p class="opquast-licence">
+            <a href="https://checklists.opquast.com/fr/" target="_blank" rel="noopener noreferrer">
+                En savoir plus sur les checklists Opquast
+                <span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                <span aria-hidden="true" class="dashicons dashicons-external"></span>
+            </a>
+        </p>
     </div>
 
     <div class="panel">
@@ -63,17 +64,17 @@
                         </select>
                     </div>
                     <div class="form-group col-md-2">
-                    <span>{l s='OR' mod='ps_quality_checklist_opquast'}</span>
+                    <span class="or">{l s='OR' mod='ps_quality_checklist_opquast'}</span>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="opquast-filter-status">{l s='Sort by status'
                             mod='ps_quality_checklist_opquast'}</label>
                         <select id="opquast-filter-status" name="opquast-filter-status">
                             <option value="">Tous les status</option>
-                            <option value="ok">Conformes</option>
-                            <option value="ko">Non conformes</option>
-                            <option value="na">Non applicables</option>
-                            <option value="nv">Non vérifiés</option>
+                            <option value="ok">{l s='Compliant' mod='ps_quality_checklist_opquast'}</option>
+                            <option value="ko">{l s='Non-compliant' mod='ps_quality_checklist_opquast'}</option>
+                            <option value="na">{l s='Innaplicable' mod='ps_quality_checklist_opquast'}</option>
+                            <option value="nv">{l s='Unverified' mod='ps_quality_checklist_opquast'}</option>
                         </select>
                     </div>
                 </div>
@@ -89,6 +90,19 @@
                                     href="#crit_{$crit.id}" aria-expanded="false" aria-controls="{$crit.description_fr}">
                                     {$crit.name_fr} - {$crit.description_fr}
                                 </a>
+                                <span class="status {if isset($currentCriterias[$crit.id])} {$currentCriterias[$crit.id]} {else}nv{/if}">
+                                {if isset($currentCriterias[$crit.id])} 
+                                    {if $currentCriterias[$crit.id] == 'ok'}
+                                        {l s='Compliant' mod='ps_quality_checklist_opquast'}
+                                    {elseif $currentCriterias[$crit.id] == 'ko'}
+                                        {l s='Non-compliant' mod='ps_quality_checklist_opquast'}
+                                    {elseif $currentCriterias[$crit.id] == 'na'}
+                                        {l s='Innaplicable' mod='ps_quality_checklist_opquast'}
+                                    {/if}
+                                {else}
+                                    {l s='Unverified' mod='ps_quality_checklist_opquast'}
+                                {/if}
+                                </span>
                             </p>
                         </div>
                         <div id="crit_{$crit.id}" class="collapse" role="tabpanel"
@@ -117,15 +131,18 @@
                                 <div class="content"> 
                                     <span>{{l s='Goal' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {$crit.goal_fr nofilter}
+                                        {capture assign="goal"}goal_{$iso_code}{/capture}
+                                        {$crit.$goal nofilter}
                                     </div>
                                     <span>{{l s='Solution' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {$crit.solution_fr nofilter}
+                                        {capture assign="solution"}solution_{$iso_code}{/capture}
+                                        {$crit.$solution nofilter}
                                     </div>
                                     <span>{{l s='Control' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {$crit.control_fr nofilter}
+                                        {capture assign="control"}control_{$iso_code}{/capture}
+                                        {$crit.$control nofilter}
                                     </div>
                                 </div>
                                 <p>

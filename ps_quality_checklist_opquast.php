@@ -51,17 +51,27 @@ class Ps_Quality_Checklist_Opquast extends Module
             $toSave[$id] = $response;
         }
 
-        Configuration::updateValue('PSOPQUASTCURRENT', serialize($toSave));
+        return Configuration::updateValue('PSOPQUASTCURRENT', serialize($toSave));
     }
 
     public function getContent()
     {
+        $html = null;
+
         if (Tools::isSubmit('submitOpquastChecklist')) {
-            $this->postProcess();
+            if ($this->postProcess()) {
+                $html .= $this->displayConfirmation($this->l('Settings saved'));
+            } else {
+                $html .= $this->displayError($this->l('An error has occurred. Please try again'));
+            }
         }
         $this->context->controller->addJS($this->_path . 'views/js/admin.js');
         $this->context->controller->addCSS($this->_path . 'views/css/admin.css');
 
+        $iso_code = 'fr';
+        if ($this->context->language->iso_code !== 'fr') {
+            $iso_code = 'en';
+        }
 
         $checklist = ChecklistUtilty::getOPQuastChecklist();
         $themes = ChecklistUtilty::getThemesFromJSON();
@@ -70,9 +80,8 @@ class Ps_Quality_Checklist_Opquast extends Module
         
         $this->context->smarty->assign(
             array(
+                'iso_code' => $iso_code,
                 'themes' => $themes,
-                // 'criterias' => $criterias,
-                // 'criteriasContent' => $criteriasContent,
                 'checklist' => $checklist,
                 'currentCriterias' => $currentCriterias,
                 'path' => $this->_path,
@@ -81,6 +90,6 @@ class Ps_Quality_Checklist_Opquast extends Module
             )
         );
 
-        return $this->display(__FILE__, 'views/templates/admin/index.tpl');
+        return $html . $this->display(__FILE__, 'views/templates/admin/index.tpl');
     }
 }
