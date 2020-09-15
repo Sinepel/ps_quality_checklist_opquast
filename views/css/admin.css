@@ -40,6 +40,7 @@
   padding: 0;
   margin: 0;
   font-family: initials;
+  position: relative;
 }
 
 .card-header p a {
@@ -77,7 +78,13 @@
   margin: 0 3px 0 5px;
 }
 
-div.content div{
+.panel.middle {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+div.content div {
   margin-left: 20px;
   margin-top: 10px;
 }
@@ -85,4 +92,67 @@ div.content div{
 div.content span {
   font-weight: 700;
   margin-bottom: 10px;
+}
+
+.or {
+  display: flex;
+  justify-content: center;
+}
+
+.status {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 0 5px;
+  border: 1px solid;
+}
+
+.status.na {
+  border: 1px #7f8c8d dashed;
+  color: #7f8c8d;
+}
+
+.status.ok {
+  border-color: #27ae60;
+  color: #27ae60;
+}
+
+.status.ko {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.status.nv {
+  border-color: black;
+  color: black;
+}
+
+.panel-footer {
+  position: sticky;
+  bottom: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .panel.middle {
+    width: 100%;
+  }
+
+  .status {
+    float: right;
+    /* right: 10px; */
+    /* bottom: 10px; */
+    padding: 0 5px;
+    border: 1px solid;
+    /* margin-top: 5px; */
+    margin-right: 5px;
+    position: absolute;
+  }
+
+  #opquast-panels fieldset input[type="radio"] {
+    display: list-item;
+  }
+
+  .card-header p a {
+    max-width: 70%;
+  }
 }
