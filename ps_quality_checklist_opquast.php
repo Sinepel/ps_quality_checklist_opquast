@@ -14,7 +14,7 @@ class Ps_Quality_Checklist_Opquast extends Module
     {
         $this->name = 'ps_quality_checklist_opquast';
         $this->tab = 'front_office_features';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = '<a href="https://constantin-boulanger.fr" target="_blank">Constantin Boulanger</a>';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -37,7 +37,14 @@ class Ps_Quality_Checklist_Opquast extends Module
 
     public function postProcess()
     {
-        $opquastResponses = array_filter(Tools::getAllValues(), function ($e) {
+        $values = null;
+        if (method_exists('Tools','getAllValues')) {
+            $values = Tools::getAllValues();
+        } else {
+            $values = $_GET + $_POST;
+        }
+        
+        $opquastResponses = array_filter($values, function ($e) {
             return false !== strpos($e, 'opquast-checklist-');
         }, ARRAY_FILTER_USE_KEY);
 
