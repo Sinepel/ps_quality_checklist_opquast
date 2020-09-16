@@ -82,7 +82,7 @@ class Ps_Quality_Checklist_Opquast extends Module
      */
     public function getContent()
     {
-        $html = null;
+        $html = '';
 
         if (Tools::isSubmit('submitOpquastChecklist')) {
             if ($this->postProcess()) {
