@@ -1,8 +1,8 @@
 <?php
 
-class ChecklistUtilty
+class ChecklistUtility
 {
-    const OPQUAST_THEMATHIQUES = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/data-fr-thematics.json';
+    const OPQUAST_THEMATHICS = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/data-fr-thematics.json';
     const OPQUAST = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/checklist-opquast-v4.json';
 
     public static function getOPQuastChecklist()
@@ -17,6 +17,7 @@ class ChecklistUtilty
             $criteria->sanitized_tags = implode(' ', $sanitized_tags_array);
             $criteria = get_object_vars($criteria);
         }
+
         uasort($get_json, function ($a, $b) {
             return (int)$a['name_fr'] > (int)$b['name_fr'];
         });
@@ -27,7 +28,7 @@ class ChecklistUtilty
     public static function getThemesFromJSON()
     {
         $themes = [];
-        $get_json = file_get_contents(self::OPQUAST_THEMATHIQUES);
+        $get_json = file_get_contents(self::OPQUAST_THEMATHICS);
         $get_json = json_decode($get_json);
 
         foreach ($get_json as $theme) {
@@ -57,7 +58,7 @@ class ChecklistUtilty
         if (empty($status)) {
             return;
         }
-        
+
         $criteria = self::getOPQuastChecklist();
 
         $existing_criteria = array();

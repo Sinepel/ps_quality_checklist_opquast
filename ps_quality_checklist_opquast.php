@@ -99,10 +99,10 @@ class Ps_Quality_Checklist_Opquast extends Module
             $iso_code = 'en';
         }
 
-        $checklist = ChecklistUtilty::getOPQuastChecklist();
-        $themes = ChecklistUtilty::getThemesFromJSON();
-        $currentCriterias = ChecklistUtilty::getCurrentCriterias();
-        $stats = ChecklistUtilty::getStats();
+        $checklist = ChecklistUtility::getOPQuastChecklist();
+        $themes = ChecklistUtility::getThemesFromJSON();
+        $currentCriterias = ChecklistUtility::getCurrentCriterias();
+        $stats = ChecklistUtility::getStats();
 
         $this->context->smarty->assign(
             [
