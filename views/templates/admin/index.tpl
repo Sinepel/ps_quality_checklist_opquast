@@ -4,19 +4,19 @@
         <ul class="opquast-stats">
             <li>
                 <span class="dashicons dashicons-yes-alt opquast-stat-green"></span>
-                Conforme : {$stats.ok}
+                {l s='Compliant' mod='ps_quality_checklist_opquast'} : {$stats.ok}
             </li>
             <li>
                 <span class="dashicons dashicons-yes-alt opquast-stat-red"></span>
-                Non conforme : {$stats.ko}
+                {l s='Non-compliant' mod='ps_quality_checklist_opquast'} : {$stats.ko}
             </li>
             <li>
                 <span class="dashicons dashicons-yes-alt opquast-stat-blue"></span>
-                Non applicable : {$stats.na}
+                {l s='Innaplicable' mod='ps_quality_checklist_opquast'} : {$stats.na}
             </li>
             <li>
                 <span class="dashicons dashicons-yes-alt opquast-stat-grey"></span>
-                Non vérifié : {$stats.nv}
+                {l s='Unverified' mod='ps_quality_checklist_opquast'} : {$stats.nv}
             </li>
 
         </ul>
@@ -28,21 +28,17 @@
             Les bonnes pratiques Opquast sont proposées sous licence <a
                 href="https://creativecommons.org/licenses/by-sa/2.0/fr/"
                 title="Creative Commons - Attribution - Partage dans les Mêmes Conditions (CC BY-SA 2.0 FR)"
-                target="_blank" rel="noopener noreferrer">CC BY-SA <span class="sr-only">(ce lien s'ouvre
-                    dans un nouvel
-                    onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+                target="_blank" rel="noopener noreferrer">CC BY-SA <span class="sr-only">({l s='opens in a new tab' mod='ps_quality_checklist_opquast'})</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
             <br />
             Les moyens de contrôle et de mise en œuvre sous licence <a
                 href="https://creativecommons.org/licenses/by-nc-sa/2.0/fr/"
                 title="Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions (CC BY-NC-SA 2.0)"
-                target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="sr-only">(ce lien s'ouvre
-                    dans
-                    un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+                target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="sr-only">({l s='opens in a new tab' mod='ps_quality_checklist_opquast'})</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
         </p>
         <p class="opquast-licence">
             <a href="https://checklists.opquast.com/fr/" target="_blank" rel="noopener noreferrer">
                 En savoir plus sur les checklists Opquast
-                <span class="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                <span class="sr-only"> ({l s='opens in a new tab' mod='ps_quality_checklist_opquast'})</span>
                 <span aria-hidden="true" class="dashicons dashicons-external"></span>
             </a>
         </p>
@@ -57,7 +53,7 @@
                         <label for="opquast-filter-thematiques">{l s='Sort by theme'
                             mod='ps_quality_checklist_opquast'}</label>
                         <select id="opquast-filter-thematiques" name="opquast-filter-thematiques">
-                            <option value="">Toutes les thématiques</option>
+                            <option value="">{l s='All thematics' mod='ps_quality_checklist_opquast'}</option>
                             {foreach $themes as $k => $thematique}
                                 <option value="{$k}">{$thematique}</option>
                             {/foreach}
@@ -70,7 +66,7 @@
                         <label for="opquast-filter-status">{l s='Sort by status'
                             mod='ps_quality_checklist_opquast'}</label>
                         <select id="opquast-filter-status" name="opquast-filter-status">
-                            <option value="">Tous les status</option>
+                            <option value="">{l s='All' mod='ps_quality_checklist_opquast'}</option>
                             <option value="ok">{l s='Compliant' mod='ps_quality_checklist_opquast'}</option>
                             <option value="ko">{l s='Non-compliant' mod='ps_quality_checklist_opquast'}</option>
                             <option value="na">{l s='Innaplicable' mod='ps_quality_checklist_opquast'}</option>
@@ -114,39 +110,40 @@
                                         value="ok" {if isset($currentCriterias[$crit.id]) &&
                                     $currentCriterias[$crit.id]
                                     == "ok"} checked {/if} />
-                                    <label for="input-ok-{$crit.id}">Conforme</label>
+                                    <label for="input-ok-{$crit.id}">{l s='Compliant' mod='ps_quality_checklist_opquast'}</label>
 
                                     <input type="radio" name="opquast-checklist-{$crit.id}" id="input-ko-{$crit.id}"
                                         value="ko" {if isset($currentCriterias[$crit.id]) &&
                                     $currentCriterias[$crit.id]
                                     == "ko"} checked {/if} />
-                                    <label for="input-ko-{$crit.id}">Non conforme</label>
+                                    <label for="input-ko-{$crit.id}">{l s='Non-compliant' mod='ps_quality_checklist_opquast'}</label>
 
                                     <input type="radio" name="opquast-checklist-{$crit.id}" id="input-na-{$crit.id}"
                                         value="na" {if isset($currentCriterias[$crit.id]) &&
                                     $currentCriterias[$crit.id]
                                     == "na"} checked {/if} />
-                                    <label for="input-na-{$crit.id}">Non applicable</label>
+                                    <label for="input-na-{$crit.id}">{l s='Innaplicable' mod='ps_quality_checklist_opquast'}</label>
                                 </fieldset>
                                 <div class="content"> 
                                     <span>{{l s='Goal' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {capture assign="goal"}goal_{$iso_code}{/capture}
+                                        {assign var="goal" value="goal_`$iso_code`"}
                                         {$crit.$goal nofilter}
                                     </div>
                                     <span>{{l s='Solution' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {capture assign="solution"}solution_{$iso_code}{/capture}
+                                        {assign var="solution" value="solution_`$iso_code`"}
                                         {$crit.$solution nofilter}
                                     </div>
                                     <span>{{l s='Control' mod='ps_quality_checklist_opquast'}}</span>
                                     <div>
-                                        {capture assign="control"}control_{$iso_code}{/capture}
+                                        {assign var="control" value="control_`$iso_code`"}
                                         {$crit.$control nofilter}
                                     </div>
                                 </div>
                                 <p>
-                                    <a href="https://checklists.opquast.com/fr/qualiteweb/{$crit.slug_fr}" class="action" target="_blank"
+                                    {assign var="slug" value="slug_`$iso_code`"}
+                                    <a href="https://checklists.opquast.com/{$iso_code}/qualiteweb/{$crit.$slug}" class="action" target="_blank"
                                         rel="noopener noreferrer">
                                         {l s='See the detail for Opquast' mod='ps_quality_checklist_opquast'}
                                         <span class="sr-only"> ({l s='opens in a new tab'
@@ -157,7 +154,7 @@
 
                                 <div class="tags">
                                     {foreach from=$crit.tags item=item key=key name=name}
-                                    <span>{$item}</span>
+                                        <span>{$item}</span>
                                     {/foreach}
                                 </div>
                             </div>
@@ -171,7 +168,7 @@
             <div class="panel-footer">
                 <button type="submit" value="1" id="module_form_submit_btn" name="submitOpquastChecklist"
                     class="btn btn-default pull-right">
-                    <i class="process-icon-save"></i> Enregistrer
+                    <i class="process-icon-save"></i> {l s='Save'}
                 </button>
             </div>
         </form>
