@@ -10,3 +10,4 @@ This extension was created by [Constantin Boulanger](https://constantin-boulange
 
 Opquast's good practices are offered under a Creative Commons BY-SA licence. The means of control and implementation are made available under Creative Commons BY-NC-SA licence.
 
+This module is offered under AFL v3 license.

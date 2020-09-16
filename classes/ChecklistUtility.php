@@ -1,31 +1,40 @@
 <?php
 
-class ChecklistUtilty
+/**
+ * 2020-present Friends of Presta community
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/MIT
+ *
+ * @author Friends of Presta community
+ * @copyright 2019-present Friends of Presta community
+ * @license https://opensource.org/licenses/MIT MIT
+ */
+
+class ChecklistUtility
 {
-    const OPQUAST_THEMATHIQUES = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/data-fr-thematiques.json';
-    // const OPQUAST_CONTENT = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/data-fr-content.json';
-    // const OPQUAST_CHECKLIST = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/data-fr.json';
-    const OPQUAST = _PS_MODULE_DIR_ . '/ps_quality_checklist_opquast/data/CHECKLIST-OPQUAST-2020.json';
+    const OPQUAST_THEMATICS = __DIR__ . '/../data/data-fr-thematics.json';
+    const OPQUAST = __DIR__ . '/../data/checklist-opquast-v4.json';
 
     public static function getOPQuastChecklist() 
     {
         $get_json = file_get_contents(self::OPQUAST);
         $get_json = json_decode($get_json);
-        // $thema = [];
 
         $get_json = get_object_vars($get_json);
         foreach ($get_json as &$criteria) {
-            // dump($criteria->thema);die;
             $sanitized_tags_array =  $criteria->thema;
-            // $thema = array_unique(array_merge($thema, $sanitized_tags_array));
-            $sanitized_tags_array = array_map(  array('Tools','link_rewrite') , $sanitized_tags_array);
+            $sanitized_tags_array = array_map(['Tools','link_rewrite'] , $sanitized_tags_array);
             $criteria->sanitized_tags = implode(' ', $sanitized_tags_array);
             $criteria = get_object_vars($criteria);
         }
         uasort($get_json, function($a, $b) {
-            return (int)$a['name_fr'] > (int)$b['name_fr'];
+            return (int) $a['name_fr'] > (int) $b['name_fr'];
         });
-        // echo json_encode($thema);die;
         
         return $get_json;
     }
@@ -33,7 +42,7 @@ class ChecklistUtilty
     public static function getThemesFromJSON()
     {
         $themes = [];
-        $get_json = file_get_contents(self::OPQUAST_THEMATHIQUES);
+        $get_json = file_get_contents(self::OPQUAST_THEMATICS);
         $get_json = json_decode($get_json);
 
         foreach ($get_json as $theme) {
@@ -43,7 +52,7 @@ class ChecklistUtilty
         return $themes;
     }
 
-    public static function getCurrentCriterias()
+    public static function getCurrentCriterion()
     {
         return unserialize(Configuration::get('PSOPQUASTCURRENT'));
     }
@@ -58,25 +67,26 @@ class ChecklistUtilty
         ];
     }
 
-    public static function getStatsByStatus( $status = '' ) {
-        if ( empty( $status ) ) {
+    public static function getStatsByStatus($status = '')
+    {
+        if (empty($status)) {
                 return;
         }
-        $criteria = self::getOPQuastChecklist(); 
+
+        $criteria = self::getOPQuastChecklist();
+        $existing_criteria = self::getCurrentCriterion();
        
-        $existing_criteria = array();
-        $existing_criteria = self::getCurrentCriterias();
-       
-        $corresponding_criteria = array();
-        if ( $status === 'nv' ) {
+        $corresponding_criteria = [];
+        if ($status === 'nv') {
                 return count( $criteria ) - count( $existing_criteria );               
-        } else {
-                foreach ( $existing_criteria as $key => $value ) {
-                        if ( $value === $status ) {
-                                $corresponding_criteria[] = $key;
-                        }
-                }
-                return count( $corresponding_criteria );
         }
-}
+
+        foreach ($existing_criteria as $key => $value) {
+                if ($value === $status) {
+                        $corresponding_criteria[] = $key;
+                }
+        }
+
+        return count($corresponding_criteria);
+    }
 }
