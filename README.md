@@ -1,5 +1,8 @@
 # Prestashop Quality Checklist Opquast
 
+**Want to support me? Buy me a coffe ☕️ ! https://paypal.me/constantinBoulanger**
+
+
 Accessibility, referencing, performance, navigation, mobile, video, security... good web practices gathered in the reference checklist for web professionals!
 
 This Prestashop extension allows you to obtain the 240 criteria of Opquast's Web Quality checklist in your Prestashop back-office.
